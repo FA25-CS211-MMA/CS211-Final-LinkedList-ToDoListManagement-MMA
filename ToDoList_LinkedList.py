@@ -2,88 +2,88 @@
 # Author: <Mehmet Mert Asma>
 # Demonstrates linked list operations: insert, delete, update, search, traverse.
 
-class Node:
-    def __init__(self, data, next):
-        self.data = data
-        self.next = next
+class Node: # I made the node here 
+    def __init__(self, data, next): # constructor
+        self.data = data # setting data
+        self.next = next # setting next node
     
-    def getData(self):
-        return self.data
+    def getData(self): # getting data
+        return self.data # return data
     
-    def getNext(self):
-        return self.next
+    def getNext(self): # getting next node
+        return self.next # return next node
     
-    def setData(self, Data):
-        self.data = Data
+    def setData(self, Data): # setting data
+        self.data = Data # set data to Data
     
-    def setNext(self, Next):
-        self.next = Next
+    def setNext(self, Next): # setting next node
+        self.next = Next # set next node to Next
     
-    def __str__(self):
-        return str(self.data)
+    def __str__(self): # string representation
+        return str(self.data) # return data as string
     
-class LinkedList:
+class LinkedList: # linked list class
 
-    def __init__(self):
+    def __init__(self): # constructor
 
-        self.head = None
+        self.head = None # head node initialized to None
     
-    def insert_at_beginning(self, data):
+    def insert_at_beginning(self, data): # insert at beginning
 
-        new_node = Node(data, self.head)
-        self.head = new_node
+        new_node = Node(data, self.head) # create new node
+        self.head = new_node # set head to new node
     
-    def insert_at_end(self, data):
+    def insert_at_end(self, data): # insert at end
         
-        new_node = Node(data, None)
-        if self.head is None:
-            self.head = new_node
-            return
-        current = self.head
-        while current.getNext() is not None:
-            current = current.getNext()
-        current.setNext(new_node)
+        new_node = Node(data, None) # create new node
+        if self.head is None: # if list is empty
+            self.head = new_node # set head to new node
+            return 
+        current = self.head # start from head
+        while current.getNext() is not None: # traverse to end
+            current = current.getNext() # move to next node
+        current.setNext(new_node) # set next of last node to new node
 
-    def delete_node(self, key):
+    def delete_node(self, key): # delete node by key
 
-        current = self.head
-        previous = None
+        current = self.head # start from head
+        previous = None # previous node initialized to None
 
-        if current is None:
-            print("List is empty.")
-            return
-
-        if current.getData() == key:
-            self.head = current.getNext()
+        if current is None: # if list is empty
+            print("List is empty.") # print message
             return
 
-        while current is not None and current.getData() != key:
-            previous = current
-            current = current.getNext()
-
-        if current is None:
-            print("Node not found.")
+        if current.getData() == key: # if head node is to be deleted
+            self.head = current.getNext() # set head to next node
             return
 
-        previous.setNext(current.getNext())
+        while current is not None and current.getData() != key: # traverse to find key
+            previous = current # set previous to current
+            current = current.getNext() # move to next node
 
-    def delete_at_position(self, pos):
+        if current is None: # if key not found
+            print("Node not found.") # print message
+            return
+
+        previous.setNext(current.getNext()) # unlink the node
+
+    def delete_at_position(self, pos): # delete node at position
     
-        if self.head is None or pos < 0:
+        if self.head is None or pos < 0: # if list is empty or position is invalid
             print("Invalid position or empty list.")
             return
 
-        if pos == 0:
+        if pos == 0: # if head node is to be deleted
             self.head = self.head.getNext()
             return
 
-        current = self.head
-        index = 0
-        while current is not None and index < pos - 1:
-            current = current.getNext()
+        current = self.head 
+        index = 0 
+        while current is not None and index < pos - 1: 
+            current = current.getNext() 
             index += 1
 
-        if current is None or current.getNext() is None:
+        if current is None or current.getNext() is None: 
             print("Position out of range.")
             return
 
